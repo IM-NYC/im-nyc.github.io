@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plays GG - Home</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-gamepad"></i>
+                Plays <span>GG</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="giveaways.html">Giveaways</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="signup-btn">Sign Up</button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Welcome to <span>Plays GG</span></h1>
+                <p>Your ultimate destination for unblocked games and exclusive giveaways</p>
+                <div class="hero-buttons">
+                    <a href="games.html" class="btn btn-primary">Play Games</a>
+                    <a href="giveaways.html" class="btn btn-secondary">Enter Giveaways</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Directory Section -->
+        <section class="directory">
+            <h2>Choose Your Destination</h2>
+            <div class="directory-grid">
+                <div class="directory-card" onclick="location.href='games.html'">
+                    <div class="directory-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Unblocked Games</h3>
+                    <p>Access our collection of fun, unblocked games that work anywhere</p>
+                    <div class="directory-stats">
+                        <span><i class="fas fa-gamepad"></i> 50+ Games</span>
+                        <span><i class="fas fa-users"></i> Multiplayer</span>
+                    </div>
+                </div>
+
+                <div class="directory-card" onclick="location.href='giveaways.html'">
+                    <div class="directory-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>Game Giveaways</h3>
+                    <p>Enter to win free games, gift cards, and gaming accessories</p>
+                    <div class="directory-stats">
+                        <span><i class="fas fa-gift"></i> Active Giveaways</span>
+                        <span><i class="fas fa-trophy"></i> Daily Winners</span>
+                    </div>
+                </div>
+
+                <div class="directory-card coming-soon">
+                    <div class="directory-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Leaderboards</h3>
+                    <p>Compete with other players and climb the rankings</p>
+                    <div class="coming-soon-badge">Coming Soon</div>
+                    <div class="directory-stats">
+                        <span><i class="fas fa-trophy"></i> Global Rankings</span>
+                        <span><i class="fas fa-star"></i> Achievements</span>
+                    </div>
+                </div>
+
+                <div class="directory-card coming-soon">
+                    <div class="directory-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Community</h3>
+                    <p>Join our gaming community and connect with other players</p>
+                    <div class="coming-soon-badge">Coming Soon</div>
+                    <div class="directory-stats">
+                        <span><i class="fas fa-comments"></i> Forums</span>
+                        <span><i class="fas fa-share"></i> Share Gameplay</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Section -->
+        <section class="featured">
+            <div class="featured-grid">
+                <div class="featured-item">
+                    <h3><i class="fas fa-fire"></i> Trending Game</h3>
+                    <div class="game-preview" onclick="location.href='games.html'">
+                        <img src="https://1v1lolonline.io//data/image/game/1v1lol-online-game-feature.jpg" alt="1v1.LOL">
+                        <div class="preview-info">
+                            <h4>1v1.LOL</h4>
+                            <p>Build, edit and shoot in this competitive building shooter</p>
+                            <span class="play-now">Play Now →</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="featured-item">
+                    <h3><i class="fas fa-gift"></i> Current Giveaway</h3>
+                    <div class="giveaway-preview" onclick="location.href='giveaways.html'">
+                        <div class="preview-info">
+                            <h4>$50 Steam Gift Card</h4>
+                            <p>Enter for a chance to win a $50 Steam gift card</p>
+                            <div class="giveaway-meta">
+                                <span><i class="fas fa-users"></i> 2,345 Entries</span>
+                                <span><i class="fas fa-clock"></i> 3 days left</span>
+                            </div>
+                            <span class="enter-now">Enter Now →</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
