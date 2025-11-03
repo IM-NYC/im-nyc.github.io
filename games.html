@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unblocked Games - Plays GG</title>
+    <title>Unblocked Games - PlaysGG</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/games.css">
 </head>
@@ -11,10 +11,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">
-                <i class="fas fa-gamepad"></i>
-                Plays <span>GG</span>
-            </a>
+            <a href="index.html" class="logo"><i class="fas fa-gamepad"></i>Plays<span>GG</span></a>
             
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -53,6 +50,7 @@
 
         <!-- Games Grid -->
         <div class="games-container">
+            <!-- 1v1.LOL -->
             <div class="game-card featured-game" onclick="loadGame('1v1.LOL', 'https://1v1.lol')">
                 <div class="featured-badge">Popular</div>
                 <div class="game-thumbnail" style="background-image: url('https://1v1lolonline.io//data/image/game/1v1lol-online-game-feature.jpg')"></div>
@@ -66,7 +64,51 @@
                     <button class="play-btn">Play Now</button>
                 </div>
             </div>
-            
+
+            <!-- GTA V Guessr -->
+            <div class="game-card featured-game" onclick="loadGame('GTA V Guessr', 'https://lostgamer.io/guessr/grand-theft-auto-v?controls=no+move')">
+                <div class="featured-badge">New</div>
+                <div class="game-thumbnail" style="background-image: url('https://static1-us.millenium.gg/articles/1/28/88/1/@/251611-gta-5-map-orig-1-article_m-1.jpg')"></div>
+                <div class="game-info">
+                    <h3>GTA V Guessr</h3>
+                    <p>Test your GTA V knowledge! Guess locations across Los Santos and Blaine County.</p>
+                    <div class="game-meta">
+                        <span><i class="fas fa-star"></i> 4.7</span>
+                        <span><i class="fas fa-map"></i> Geography</span>
+                    </div>
+                    <button class="play-btn">Play Now</button>
+                </div>
+            </div>
+
+            <!-- Fortnite Guessr -->
+            <div class="game-card" onclick="loadGame('Fortnite Guessr', 'https://lostgamer.io/guessr/maps?games=fortnite')">
+                <div class="game-thumbnail" style="background-image: url('https://image-proxy.bo3.gg/uploads/news/286034/title_image/webp-b8302e5d03cb9c18c24d8feb821ff39f.webp.webp?w=1248&h=624')"></div>
+                <div class="game-info">
+                    <h3>Fortnite Guessr</h3>
+                    <p>Test your Fortnite knowledge! Guess the location based on the map screenshot.</p>
+                    <div class="game-meta">
+                        <span><i class="fas fa-star"></i> 4.8</span>
+                        <span><i class="fas fa-map"></i> Geography</span>
+                    </div>
+                    <button class="play-btn">Play Now</button>
+                </div>
+            </div>
+
+            <!-- They Are Coming -->
+            <div class="game-card" onclick="loadGame('They Are Coming', 'https://script.google.com/macros/s/AKfycbzFgyO_45-IB8xSm3aznm-U6NwkuCxr8guuZuCUNwr9kbyHXBGJFRRyNqKHNOwuHwGn/exec')">
+                <div class="game-thumbnail" style="background-image: url('https://img.itch.zone/aW1nLzExMjkzMjQxLnBuZw==/original/YWsiKf.png')"></div>
+                <div class="game-info">
+                    <h3>They Are Coming</h3>
+                    <p>Defend against waves of enemies in this action-packed survival game.</p>
+                    <div class="game-meta">
+                        <span><i class="fas fa-star"></i> 4.0</span>
+                        <span><i class="fas fa-gamepad"></i> Action</span>
+                    </div>
+                    <button class="play-btn">Play Now</button>
+                </div>
+            </div>
+
+            <!-- Traffic Jam 3D -->
             <div class="game-card" onclick="loadGame('Traffic Jam 3D', 'https://html5.gamedistribution.com/337302b23b5943d8bcfc501d81d50cdb/?gd_sdk_referrer_url=https://gamedistribution.com/games/traffic-jam-3d/')">
                 <div class="game-thumbnail" style="background-image: url('https://img.gamedistribution.com/337302b23b5943d8bcfc501d81d50cdb-512x512.jpeg')"></div>
                 <div class="game-info">
@@ -79,72 +121,9 @@
                     <button class="play-btn">Play Now</button>
                 </div>
             </div>
-            
-            <div class="game-card" onclick="loadGame('Basketball Random', 'https://www.twoplayergames.org/gameframe/basket-random')">
-                <div class="game-thumbnail" style="background-image: url('https://images.twoplayergames.org/files/games/other/Basket_Random/Basket_Random.jpg?auto=format&w=200')"></div>
-                <div class="game-info">
-                    <h3>Basketball Random</h3>
-                    <p>Fun basketball game with random elements.</p>
-                    <div class="game-meta">
-                        <span><i class="fas fa-star"></i> 4.5</span>
-                        <span><i class="fas fa-users"></i> 2 Players</span>
-                    </div>
-                    <button class="play-btn">Play Now</button>
-                </div>
-            </div>
-            
-            <div class="game-card" onclick="loadGame('Volley Random', 'https://www.twoplayergames.org/gameframe/volley-random')">
-                <div class="game-thumbnail" style="background-image: url('https://images.twoplayergames.org/files/games/o1/Volley_random/Volley_random.jpg?auto=format&w=200')"></div>
-                <div class="game-info">
-                    <h3>Volley Random</h3>
-                    <p>Fun volleyball game with physics.</p>
-                    <div class="game-meta">
-                        <span><i class="fas fa-star"></i> 4.3</span>
-                        <span><i class="fas fa-users"></i> 2 Players</span>
-                    </div>
-                    <button class="play-btn">Play Now</button>
-                </div>
-            </div>
-            
-            <div class="game-card" onclick="loadGame('Boxing Random', 'https://www.twoplayergames.org/gameframe/boxing-random')">
-                <div class="game-thumbnail" style="background-image: url('https://images.twoplayergames.org/files/games/other/Boxing_Random/Boxing_Random.jpg?auto=format&w=200')"></div>
-                <div class="game-info">
-                    <h3>Boxing Random</h3>
-                    <p>Fun boxing game with random elements.</p>
-                    <div class="game-meta">
-                        <span><i class="fas fa-star"></i> 4.1</span>
-                        <span><i class="fas fa-users"></i> 2 Players</span>
-                    </div>
-                    <button class="play-btn">Play Now</button>
-                </div>
-            </div>
-            
-            <div class="game-card" onclick="loadGame('Soccer Random', 'https://www.twoplayergames.org/gameframe/soccer-random')">
-                <div class="game-thumbnail" style="background-image: url('https://play-lh.googleusercontent.com/G1PIlb6HWKSaDre0XpUcmKGps9T4iamsSlwrogB3EJzYv4bz0M2am4D17MtGzndaOOU=w600-h300-pc0xffffff-pd')"></div>
-                <div class="game-info">
-                    <h3>Soccer Random</h3>
-                    <p>Fun soccer game with physics.</p>
-                    <div class="game-meta">
-                        <span><i class="fas fa-star"></i> 4.4</span>
-                        <span><i class="fas fa-users"></i> 2 Players</span>
-                    </div>
-                    <button class="play-btn">Play Now</button>
-                </div>
-            </div>
-            
-            <div class="game-card" onclick="loadGame('Getaway Shootout', 'https://www.twoplayergames.org/gameframe/getaway-shootout')">
-                <div class="game-thumbnail" style="background-image: url('https://img.gamesgo.net/storage/images/games/getaway-shootout/getaway-shootout1jpg_с.jpg')"></div>
-                <div class="game-info">
-                    <h3>Getaway Shootout</h3>
-                    <p>Race to the getaway vehicle.</p>
-                    <div class="game-meta">
-                        <span><i class="fas fa-star"></i> 4.2</span>
-                        <span><i class="fas fa-users"></i> 2 Players</span>
-                    </div>
-                    <button class="play-btn">Play Now</button>
-                </div>
-            </div>
-            
+
+            <!-- All Bros Games -->
+            <!-- Football Bros -->
             <div class="game-card" onclick="loadGame('Football Bros', 'https://footballbros.io')">
                 <div class="game-thumbnail" style="background-image: url('https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co951q.jpg')"></div>
                 <div class="game-info">
@@ -157,7 +136,8 @@
                     <button class="play-btn">Play Now</button>
                 </div>
             </div>
-            
+
+            <!-- Basket Bros -->
             <div class="game-card" onclick="loadGame('Basket Bros', 'https://basketbros.io')">
                 <div class="game-thumbnail" style="background-image: url('https://imgs.crazygames.com/basketbros_1x1/20250320082608/basketbros_1x1-cover?format=auto&quality=70&metadata=none')"></div>
                 <div class="game-info">
@@ -170,7 +150,8 @@
                     <button class="play-btn">Play Now</button>
                 </div>
             </div>
-            
+
+            <!-- Baseball Bros -->
             <div class="game-card" onclick="loadGame('Baseball Bros', 'https://baseballbros.io')">
                 <div class="game-thumbnail" style="background-image: url('https://images.twoplayergames.org/files/games/other/baseball-bros.jpg?auto=format&w=200')"></div>
                 <div class="game-info">
@@ -183,21 +164,105 @@
                     <button class="play-btn">Play Now</button>
                 </div>
             </div>
-            
-            <div class="game-card" onclick="loadGame('They Are Coming', 'https://script.google.com/macros/s/AKfycbzFgyO_45-IB8xSm3aznm-U6NwkuCxr8guuZuCUNwr9kbyHXBGJFRRyNqKHNOwuHwGn/exec')">
-                <div class="game-thumbnail" style="background-image: url('https://img.tapimg.net/market/images/FqVVgBYH3M4P8tTUCGAWaGTSQLlg.png')"></div>
+
+            <!-- Wrestle Bros -->
+            <div class="game-card" onclick="loadGame('Wrestle Bros', 'https://wrestlebros.io')">
+                <div class="game-thumbnail" style="background-image: url('https://imgs.crazygames.com/wrestle-bros_16x9/20250320082313/wrestle-bros_16x9-cover?metadata=none&quality=100&width=1200&height=630&fit=crop')"></div>
                 <div class="game-info">
-                    <h3>They Are Coming</h3>
-                    <p>Defend against waves of enemies.</p>
+                    <h3>Wrestle Bros</h3>
+                    <p>Fun wrestling game with physics and multiplayer action.</p>
                     <div class="game-meta">
-                        <span><i class="fas fa-star"></i> 4.0</span>
-                        <span><i class="fas fa-gamepad"></i> Action</span>
+                        <span><i class="fas fa-star"></i> 4.5</span>
+                        <span><i class="fas fa-users"></i> Multiplayer</span>
                     </div>
                     <button class="play-btn">Play Now</button>
                 </div>
             </div>
 
-            <!-- Additional games can be added here in the future -->
+            <!-- Soccer Bros -->
+            <div class="game-card" onclick="loadGame('Soccer Bros', 'https://soccerbros.gg')">
+                <div class="game-thumbnail" style="background-image: url('https://imgs.crazygames.com/soccer-bros_16x9/20240109055124/soccer-bros_16x9-cover?metadata=none&quality=60&height=5154')"></div>
+                <div class="game-info">
+                    <h3>Soccer Bros</h3>
+                    <p>Fun soccer game with simple controls and multiplayer matches.</p>
+                    <div class="game-meta">
+                        <span><i class="fas fa-star"></i> 4.6</span>
+                        <span><i class="fas fa-users"></i> Multiplayer</span>
+                    </div>
+                    <button class="play-btn">Play Now</button>
+                </div>
+            </div>
+
+            <!-- All Random Games -->
+            <!-- Basketball Random -->
+            <div class="game-card" onclick="loadGame('Basketball Random', 'https://www.twoplayergames.org/gameframe/basket-random')">
+                <div class="game-thumbnail" style="background-image: url('https://images.twoplayergames.org/files/games/other/Basket_Random/Basket_Random.jpg?auto=format&w=200')"></div>
+                <div class="game-info">
+                    <h3>Basketball Random</h3>
+                    <p>Fun basketball game with random elements.</p>
+                    <div class="game-meta">
+                        <span><i class="fas fa-star"></i> 4.5</span>
+                        <span><i class="fas fa-users"></i> 2 Players</span>
+                    </div>
+                    <button class="play-btn">Play Now</button>
+                </div>
+            </div>
+
+            <!-- Volley Random -->
+            <div class="game-card" onclick="loadGame('Volley Random', 'https://www.twoplayergames.org/gameframe/volley-random')">
+                <div class="game-thumbnail" style="background-image: url('https://images.twoplayergames.org/files/games/o1/Volley_random/Volley_random.jpg?auto=format&w=200')"></div>
+                <div class="game-info">
+                    <h3>Volley Random</h3>
+                    <p>Fun volleyball game with physics.</p>
+                    <div class="game-meta">
+                        <span><i class="fas fa-star"></i> 4.3</span>
+                        <span><i class="fas fa-users"></i> 2 Players</span>
+                    </div>
+                    <button class="play-btn">Play Now</button>
+                </div>
+            </div>
+
+            <!-- Boxing Random -->
+            <div class="game-card" onclick="loadGame('Boxing Random', 'https://www.twoplayergames.org/gameframe/boxing-random')">
+                <div class="game-thumbnail" style="background-image: url('https://images.twoplayergames.org/files/games/other/Boxing_Random/Boxing_Random.jpg?auto=format&w=200')"></div>
+                <div class="game-info">
+                    <h3>Boxing Random</h3>
+                    <p>Fun boxing game with random elements.</p>
+                    <div class="game-meta">
+                        <span><i class="fas fa-star"></i> 4.1</span>
+                        <span><i class="fas fa-users"></i> 2 Players</span>
+                    </div>
+                    <button class="play-btn">Play Now</button>
+                </div>
+            </div>
+
+            <!-- Soccer Random -->
+            <div class="game-card" onclick="loadGame('Soccer Random', 'https://www.twoplayergames.org/gameframe/soccer-random')">
+                <div class="game-thumbnail" style="background-image: url('https://play-lh.googleusercontent.com/G1PIlb6HWKSaDre0XpUcmKGps9T4iamsSlwrogB3EJzYv4bz0M2am4D17MtGzndaOOU=w600-h300-pc0xffffff-pd')"></div>
+                <div class="game-info">
+                    <h3>Soccer Random</h3>
+                    <p>Fun soccer game with physics.</p>
+                    <div class="game-meta">
+                        <span><i class="fas fa-star"></i> 4.4</span>
+                        <span><i class="fas fa-users"></i> 2 Players</span>
+                    </div>
+                    <button class="play-btn">Play Now</button>
+                </div>
+            </div>
+
+            <!-- Getaway Shootout -->
+            <div class="game-card" onclick="loadGame('Getaway Shootout', 'https://www.twoplayergames.org/gameframe/getaway-shootout')">
+                <div class="game-thumbnail" style="background-image: url('https://img.gamesgo.net/storage/images/games/getaway-shootout/getaway-shootout1jpg_с.jpg')"></div>
+                <div class="game-info">
+                    <h3>Getaway Shootout</h3>
+                    <p>Race to the getaway vehicle.</p>
+                    <div class="game-meta">
+                        <span><i class="fas fa-star"></i> 4.2</span>
+                        <span><i class="fas fa-users"></i> 2 Players</span>
+                    </div>
+                    <button class="play-btn">Play Now</button>
+                </div>
+            </div>
         </div>
     </div>
 
