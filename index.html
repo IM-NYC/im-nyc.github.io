@@ -3,124 +3,527 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlaysGG - Home</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <title>Plays GG - Unblocked Games</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --dark: #0f172a;
+            --card-bg: #1e293b;
+            --light: #f8fafc;
+            --text-light: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 16px;
+            right: 16px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+            margin-bottom: 60px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Featured Games */
+        .featured-section {
+            margin: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--light);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .game-card {
+            background: linear-gradient(135deg, var(--card-bg), var(--dark));
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .game-thumbnail {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .game-info {
+            padding: 20px;
+        }
+
+        .game-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            color: var(--light);
+        }
+
+        .game-info p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .play-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .play-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 80px 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(30, 41, 59, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 0 0 20px 20px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-container {
+                padding: 0 15px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo"><i class="fas fa-gamepad"></i>Plays<span>GG</span></a>
+            <a href="index.html" class="logo">
+                <i class="fas fa-gamepad"></i>
+                Plays <span>GG</span>
+            </a>
             
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="games.html">Games</a></li>
-                <li><a href="giveaways.html">Giveaways</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="hacks.html">Hacks</a></li>
             </ul>
             
-            <div class="nav-actions">
-                <button class="signup-btn">Sign Up</button>
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
     <div class="container">
         <!-- Hero Section -->
         <section class="hero">
-            <div class="hero-content">
-                <h1>Welcome to <span>PlaysGG</span></h1>
-                <p>Your ultimate destination for unblocked games and exclusive giveaways</p>
-                <div class="hero-buttons">
-                    <a href="games.html" class="btn btn-primary">Play Games</a>
-                    <a href="giveaways.html" class="btn btn-secondary">Enter Giveaways</a>
+            <h1>Play Unblocked Games</h1>
+            <p>Access your favorite games anywhere, anytime. No restrictions, just pure gaming fun!</p>
+            <div class="hero-buttons">
+                <a href="games.html" class="btn btn-primary">Play Games Now</a>
+                <a href="hacks.html" class="btn btn-secondary">Educational Tools</a>
+            </div>
+        </section>
+
+        <!-- Featured Games Section -->
+        <section class="featured-section">
+            <h2 class="section-title">Featured Games</h2>
+            <div class="games-grid">
+                <div class="game-card" onclick="window.location.href='games.html'">
+                    <div class="game-thumbnail" style="background-image: url('images/game-thumbnails/1v1.jpg'); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                        🎯
+                    </div>
+                    <div class="game-info">
+                        <h3>1v1.LOL</h3>
+                        <p>Build, edit and shoot in this competitive building shooter</p>
+                        <div class="game-meta">
+                            <span><i class="fas fa-star"></i> 4.7</span>
+                            <span><i class="fas fa-users"></i> Multiplayer</span>
+                        </div>
+                        <a href="games.html" class="play-btn">Play Now</a>
+                    </div>
+                </div>
+
+                <div class="game-card" onclick="window.location.href='games.html'">
+                    <div class="game-thumbnail" style="background-image: url('images/game-thumbnails/basket_random.jpg'); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                        🏀
+                    </div>
+                    <div class="game-info">
+                        <h3>Basketball Random</h3>
+                        <p>Fun basketball game with random elements and physics</p>
+                        <div class="game-meta">
+                            <span><i class="fas fa-star"></i> 4.5</span>
+                            <span><i class="fas fa-users"></i> 2 Players</span>
+                        </div>
+                        <a href="games.html" class="play-btn">Play Now</a>
+                    </div>
+                </div>
+
+                <div class="game-card" onclick="window.location.href='games.html'">
+                    <div class="game-thumbnail" style="background-image: url('images/game-thumbnails/fortnight-geoguessr.webp'); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                        🥊
+                    </div>
+                    <div class="game-info">
+                        <h3>Fortnite Guessr</h3>
+                        <p>Test your Fortnite knowledge! Guess the location based on the map screenshot.</p>
+                        <div class="game-meta">
+                            <span><i class="fas fa-star"></i> 4.1</span>
+                            <span><i class="fas fa-users"></i> 1 Player</span>
+                        </div>
+                        <a href="games.html" class="play-btn">Play Now</a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Directory Section -->
-        <section class="directory">
-            <h2>Choose Your Destination</h2>
-            <div class="directory-grid">
-                <div class="directory-card" onclick="location.href='games.html'">
-                    <div class="directory-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <h3>Unblocked Games</h3>
-                    <p>Access our collection of fun, unblocked games that work anywhere</p>
-                    <div class="directory-stats">
-                        <span><i class="fas fa-gamepad"></i> 50+ Games</span>
-                        <span><i class="fas fa-users"></i> Multiplayer</span>
-                    </div>
-                </div>
-
-                <div class="directory-card" onclick="location.href='giveaways.html'">
-                    <div class="directory-icon">
-                        <i class="fas fa-gift"></i>
-                    </div>
-                    <h3>Game Giveaways</h3>
-                    <p>Enter to win free games, gift cards, and gaming accessories</p>
-                    <div class="directory-stats">
-                        <span><i class="fas fa-gift"></i> Active Giveaways</span>
-                        <span><i class="fas fa-trophy"></i> Daily Winners</span>
-                    </div>
-                </div>
-
-                <div class="directory-card coming-soon">
-                    <div class="directory-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Community</h3>
-                    <p>Join our gaming community and connect with other players</p>
-                    <div class="coming-soon-badge">Coming Soon</div>
-                    <div class="directory-stats">
-                        <span><i class="fas fa-comments"></i> Forums</span>
-                        <span><i class="fas fa-share"></i> Share Gameplay</span>
-                    </div>
-                </div>
+        <!-- Features Section -->
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Unblocked Anywhere</h3>
+                <p>Play at school, work, or anywhere with internet access</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <h3>No Downloads</h3>
+                <p>All games run directly in your browser - no installation needed</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Fast Loading</h3>
+                <p>Optimized for quick loading and smooth gameplay</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Safe & Secure</h3>
+                <p>All games are carefully selected for safety and quality</p>
             </div>
         </section>
 
-        <!-- Featured Section -->
-        <section class="featured">
-            <div class="featured-grid">
-                <div class="featured-item">
-                    <h3><i class="fas fa-fire"></i> Trending Game</h3>
-                    <div class="game-preview" onclick="location.href='games.html'">
-                        <img src="https://image1.foxdata.com/gp-proxy/Shj_hBe1ErpmWnJDFnfSyMSL2p3ID-VPQ-UF3t1iUkdJUj_mJ6Ea7GjnZeREW4RWBJ0z" alt="1v1.LOL">
-                        <div class="preview-info">
-                            <h4>1v1.LOL</h4>
-                            <p>Build, edit and shoot in this competitive building shooter</p>
-                            <span class="play-now">Play Now →</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="featured-item">
-                    <h3><i class="fas fa-gift"></i> Featured Giveaway</h3>
-                    <div class="giveaway-preview" onclick="location.href='giveaways.html'">
-                        <div class="preview-info">
-                            <div class="robux-mini-display">
-                                <span class="robux-amount">5,000</span>
-                                <span class="robux-text">ROBUX</span>
-                            </div>
-                            <h4>Christmas Robux Giveaway</h4>
-                            <p>🎅 In collaboration with KreekCraft 🎅</p>
-                            <div class="giveaway-meta">
-                                <span><i class="fas fa-users"></i> 12,847 Entries</span>
-                                <span><i class="fas fa-clock"></i> Until Christmas 2025</span>
-                            </div>
-                            <span class="enter-now">Enter Now →</span>
-                        </div>
-                    </div>
-                </div>
+        <!-- Call to Action -->
+        <section class="hero">
+            <h2>Ready to Play?</h2>
+            <p>Explore our full collection of unblocked games</p>
+            <div class="hero-buttons">
+                <a href="games.html" class="btn btn-primary">View All Games</a>
             </div>
         </section>
     </div>
 
-    <script src="js/main.js"></script>
+    <script>
+        // Mobile menu functionality
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const navLinks = document.querySelector('.nav-links');
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            
+            if (!navLinks.contains(e.target) && !mobileBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>

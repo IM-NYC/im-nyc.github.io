@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plays GG - Game Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --dark: #0f172a;
+            --card-bg: #1e293b;
+            --light: #f8fafc;
+            --text-light: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 16px;
+            right: 16px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Page Content Styles */
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 60px 0;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.1), transparent 50%),
+                        radial-gradient(circle at bottom left, rgba(6, 182, 212, 0.1), transparent 50%);
+            z-index: 1;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Bookmarklet Styles */
+        .bookmarklet {
+            background: linear-gradient(135deg, var(--success), #34d399);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin: 30px 0;
+            cursor: grab;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .bookmarklet:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+        }
+
+        .bookmarklet:active {
+            cursor: grabbing;
+            transform: translateY(-2px);
+        }
+
+        .instructions {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            text-align: left;
+            border-left: 4px solid var(--primary);
+        }
+
+        .instructions h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .steps {
+            margin-left: 20px;
+        }
+
+        .steps li {
+            margin-bottom: 12px;
+            color: var(--text-light);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .success-box {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            color: var(--success);
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--warning);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            color: var(--warning);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .backup-methods {
+            margin-top: 30px;
+        }
+
+        .backup-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 5px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+        }
+
+        .backup-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .drag-indicator {
+            animation: bounce 2s infinite;
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .game-card {
+            background: linear-gradient(135deg, var(--card-bg), var(--dark));
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .game-thumbnail {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .game-info {
+            padding: 20px;
+        }
+
+        .game-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .game-info p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .play-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .play-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(30, 41, 59, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 0 0 20px 20px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .page-header {
+                padding: 40px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-container {
+                padding: 0 15px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-gamepad"></i>
+                Plays <span>GG</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="hacks.html" class="active">Hacks</a></li>
+            </ul>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Edpuzzle Hacks</h1>
+            <p>One-click solutions for Edpuzzle assignments. Get answers, skip videos, and more!</p>
+        </div>
+
+        <div class="success-box">
+            <strong>🚀 One-Click Solution:</strong> Drag the button below to your bookmarks bar to instantly get Edpuzzle answers!
+        </div>
+
+        <!-- Draggable Bookmarklet -->
+        <div style="text-align: center;">
+            <a href="javascript:(function(){fetch('https://edpuzzle.hs.vc/open.js').then(r=>r.text()).then(r=>eval(r)).catch(e=>fetch('https://cdn.jsdelivr.net/gh/ading2210/edpuzzle-answers@latest/script.js').then(r=>r.text()).then(r=>eval(r)))})();" 
+               class="bookmarklet" 
+               id="bookmarklet"
+               draggable="true">
+                <span class="drag-indicator">⬇️</span>
+                Edpuzzle Answers
+            </a>
+        </div>
+
+        <div class="instructions">
+            <h3>How to Install & Use</h3>
+            <ol class="steps">
+                <li><span class="step-number">1</span> <strong>Drag the green button above</strong> to your browser's bookmarks bar</li>
+                <li><span class="step-number">2</span> Go to any Edpuzzle assignment page</li>
+                <li><span class="step-number">3</span> Click the "Edpuzzle Answers" bookmark in your bookmarks bar</li>
+                <li><span class="step-number">4</span> A popup will appear with all answers and options!</li>
+            </ol>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">✅</div>
+                <h4>Get Multiple Choice Answers</h4>
+                <p>Automatically extracts correct answers from questions</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⏩</div>
+                <h4>Skip Videos</h4>
+                <p>Bypass video watching requirements instantly</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🤖</div>
+                <h4>AI Answer Generation</h4>
+                <p>Generate answers for open-ended questions</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h4>Auto-Submit</h4>
+                <p>Automatically submit all answers at once</p>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <strong>💡 Pro Tip:</strong> Make sure your bookmarks bar is visible. If you can't see it, press <code>Ctrl+Shift+B</code> (Windows) or <code>Cmd+Shift+B</code> (Mac) to show it.
+        </div>
+
+        <div class="backup-methods" style="text-align: center;">
+            <h3>Alternative Methods</h3>
+            <p>If dragging doesn't work, try these:</p>
+            <button class="backup-btn" onclick="createBookmarkManually()">Create Bookmark Manually</button>
+            <button class="backup-btn" onclick="copyBookmarkletCode()">Copy Bookmarklet Code</button>
+            <button class="backup-btn" onclick="showConsoleMethod()">Console Method</button>
+        </div>
+
+        <!-- Manual Creation Instructions -->
+        <div id="manualInstructions" style="display: none; margin-top: 20px;">
+            <div class="instructions">
+                <h3>Manual Bookmark Creation</h3>
+                <ol class="steps">
+                    <li><span class="step-number">1</span> Right-click on your bookmarks bar</li>
+                    <li><span class="step-number">2</span> Select "Add page" or "New bookmark"</li>
+                    <li><span class="step-number">3</span> Set the name to "Edpuzzle Answers"</li>
+                    <li><span class="step-number">4</span> Paste this code as the URL:</li>
+                </ol>
+                <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin: 15px 0; font-family: monospace; font-size: 12px; overflow-x: auto;">
+                    javascript:(function(){fetch('https://edpuzzle.hs.vc/open.js').then(r=>r.text()).then(r=>eval(r)).catch(e=>fetch('https://cdn.jsdelivr.net/gh/ading2210/edpuzzle-answers@latest/script.js').then(r=>r.text()).then(r=>eval(r)))})();
+                </div>
+                <div style="text-align: center;">
+                    <button class="backup-btn" onclick="copyManualCode()">Copy URL Code</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Console Method -->
+        <div id="consoleMethod" style="display: none; margin-top: 20px;">
+            <div class="instructions">
+                <h3>Console Method</h3>
+                <ol class="steps">
+                    <li><span class="step-number">1</span> Go to your Edpuzzle assignment</li>
+                    <li><span class="step-number">2</span> Press F12 to open Developer Tools</li>
+                    <li><span class="step-number">3</span> Click on the "Console" tab</li>
+                    <li><span class="step-number">4</span> Paste this code and press Enter:</li>
+                </ol>
+                <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin: 15px 0; font-family: monospace; font-size: 12px; overflow-x: auto;">
+                    fetch("https://edpuzzle.hs.vc/open.js").then(r=>r.text()).then(r=>eval(r)).catch(e=>fetch("https://cdn.jsdelivr.net/gh/ading2210/edpuzzle-answers@latest/script.js").then(r=>r.text()).then(r=>eval(r)))
+                </div>
+                <div style="text-align: center;">
+                    <button class="backup-btn" onclick="copyConsoleCode()">Copy Console Code</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Hacks Section -->
+        <div style="margin-top: 50px;">
+            <h2 style="text-align: center; margin-bottom: 30px; color: var(--light);">More Educational Tools</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-thumbnail" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                        📚
+                    </div>
+                    <div class="game-info">
+                        <h3>Quizlet Answers</h3>
+                        <p>Get answers for Quizlet flashcards and tests</p>
+                        <a href="#" class="play-btn">Coming Soon</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumbnail" style="background: linear-gradient(135deg, var(--warning), #fbbf24); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                        🎓
+                    </div>
+                    <div class="game-info">
+                        <h3>Khan Academy</h3>
+                        <p>Math and science problem solvers</p>
+                        <a href="#" class="play-btn">Coming Soon</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-thumbnail" style="background: linear-gradient(135deg, var(--success), #34d399); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                        🔍
+                    </div>
+                    <div class="game-info">
+                        <h3>Homework Help</h3>
+                        <p>AI-powered homework assistance</p>
+                        <a href="#" class="play-btn">Coming Soon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu functionality
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        });
+
+        // Make the bookmarklet draggable with visual feedback
+        const bookmarklet = document.getElementById('bookmarklet');
+        
+        bookmarklet.addEventListener('dragstart', function(e) {
+            e.dataTransfer.setData('text/uri-list', this.href);
+            e.dataTransfer.setData('text/plain', this.href);
+            this.style.opacity = '0.7';
+            this.style.transform = 'scale(0.95)';
+        });
+
+        bookmarklet.addEventListener('dragend', function(e) {
+            this.style.opacity = '1';
+            this.style.transform = 'scale(1)';
+            
+            // Show success message
+            setTimeout(() => {
+                alert('✅ Bookmarklet added successfully! Now go to any Edpuzzle assignment and click it.');
+            }, 100);
+        });
+
+        // Alternative methods
+        function createBookmarkManually() {
+            document.getElementById('manualInstructions').style.display = 'block';
+            document.getElementById('consoleMethod').style.display = 'none';
+        }
+
+        function showConsoleMethod() {
+            document.getElementById('consoleMethod').style.display = 'block';
+            document.getElementById('manualInstructions').style.display = 'none';
+        }
+
+        function copyBookmarkletCode() {
+            const code = `javascript:(function(){fetch('https://edpuzzle.hs.vc/open.js').then(r=>r.text()).then(r=>eval(r)).catch(e=>fetch('https://cdn.jsdelivr.net/gh/ading2210/edpuzzle-answers@latest/script.js').then(r=>r.text()).then(r=>eval(r)))})();`;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Bookmarklet code copied! You can now manually create a bookmark with this URL.');
+            });
+        }
+
+        function copyManualCode() {
+            const code = `javascript:(function(){fetch('https://edpuzzle.hs.vc/open.js').then(r=>r.text()).then(r=>eval(r)).catch(e=>fetch('https://cdn.jsdelivr.net/gh/ading2210/edpuzzle-answers@latest/script.js').then(r=>r.text()).then(r=>eval(r)))})();`;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('URL code copied! Paste this as the URL when creating your bookmark manually.');
+            });
+        }
+
+        function copyConsoleCode() {
+            const code = `fetch("https://edpuzzle.hs.vc/open.js").then(r=>r.text()).then(r=>eval(r)).catch(e=>fetch("https://cdn.jsdelivr.net/gh/ading2210/edpuzzle-answers@latest/script.js").then(r=>r.text()).then(r=>eval(r)))`;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Console code copied! Go to Edpuzzle, press F12, paste in console, and press Enter.');
+            });
+        }
+
+        // Show bookmark bar help based on browser
+        function detectBrowser() {
+            const userAgent = navigator.userAgent;
+            if (userAgent.includes('Chrome')) return 'Chrome';
+            if (userAgent.includes('Firefox')) return 'Firefox';
+            if (userAgent.includes('Safari')) return 'Safari';
+            if (userAgent.includes('Edg')) return 'Edge';
+            return 'Unknown';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const browser = detectBrowser();
+            console.log(`Browser detected: ${browser}`);
+            
+            // Add browser-specific tips
+            const tipElement = document.querySelector('.warning-box');
+            if (browser === 'Chrome') {
+                tipElement.innerHTML += '<br><strong>Chrome Tip:</strong> If bookmarks bar is hidden, press Ctrl+Shift+B to show it.';
+            } else if (browser === 'Firefox') {
+                tipElement.innerHTML += '<br><strong>Firefox Tip:</strong> Right-click the toolbar and check "Bookmarks Toolbar".';
+            } else if (browser === 'Safari') {
+                tipElement.innerHTML += '<br><strong>Safari Tip:</strong> Go to View > Show Bookmarks Bar.';
+            }
+        });
+
+        // Auto-test the bookmarklet functionality
+        bookmarklet.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('📚 This is a bookmarklet! Drag me to your bookmarks bar, then click me when you\'re on an Edpuzzle assignment page.');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const navLinks = document.querySelector('.nav-links');
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            
+            if (!navLinks.contains(e.target) && !mobileBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+    </script>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

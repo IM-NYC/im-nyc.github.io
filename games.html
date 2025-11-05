@@ -3,29 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unblocked Games - PlaysGG</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/games.css">
+    <title>All Games - Plays GG</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --dark: #0f172a;
+            --card-bg: #1e293b;
+            --light: #f8fafc;
+            --text-light: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 16px;
+            right: 16px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Games Grid */
+        .games-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-thumbnail {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            background-color: #1e293b; /* Fallback color */
+        }
+
+        .game-info {
+            padding: 20px;
+        }
+
+        .game-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .game-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+
+        .featured-game {
+            border: 2px solid var(--primary);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .play-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .play-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Game Player */
+        .game-player {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+
+        .player-header {
+            padding: 15px 20px;
+            background: var(--dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .player-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .player-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .player-actions button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .player-actions button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .game-frame {
+            width: 100%;
+            height: 600px;
+            border: none;
+            background: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(30, 41, 59, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 0 0 20px 20px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .game-frame {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-container {
+                padding: 0 15px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .games-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-frame {
+                height: 300px;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo"><i class="fas fa-gamepad"></i>Plays<span>GG</span></a>
+            <a href="index.html" class="logo">
+                <i class="fas fa-gamepad"></i>
+                Plays <span>GG</span>
+            </a>
             
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="games.html" class="active">Games</a></li>
-                <li><a href="giveaways.html">Giveaways</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="hacks.html">Hacks</a></li>
             </ul>
             
-            <div class="nav-actions">
-                <button class="signup-btn">Sign Up</button>
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
@@ -44,16 +404,17 @@
 
         <!-- Page Header -->
         <div class="page-header">
-            <h1>Unblocked Games</h1>
+            <h1>All Unblocked Games</h1>
             <p>Play your favorite games without restrictions. All games work on school and work networks.</p>
         </div>
 
         <!-- Games Grid -->
         <div class="games-container">
-            <!-- 1v1.LOL -->
             <div class="game-card featured-game" onclick="loadGame('1v1.LOL', 'https://1v1.lol')">
                 <div class="featured-badge">Popular</div>
-                <div class="game-thumbnail" style="background-image: url('https://1v1lolonline.io//data/image/game/1v1lol-online-game-feature.jpg')"></div>
+                <div class="game-thumbnail" style="background-image: url('images/game-thumbnails/1v1.jpg')">
+                    <span class="sr-only">1v1.LOL game thumbnail</span>
+                </div>
                 <div class="game-info">
                     <h3>1v1.LOL</h3>
                     <p>Build, edit and shoot in this competitive building shooter.</p>
@@ -61,28 +422,12 @@
                         <span><i class="fas fa-star"></i> 4.7</span>
                         <span><i class="fas fa-users"></i> Multiplayer</span>
                     </div>
-                    <button class="play-btn">Play Now</button>
+                    <a class="play-btn">Play Now</a>
                 </div>
             </div>
 
-            <!-- GTA V Guessr -->
-            <div class="game-card featured-game" onclick="loadGame('GTA V Guessr', 'https://lostgamer.io/guessr/grand-theft-auto-v?controls=no+move')">
-                <div class="featured-badge">New</div>
-                <div class="game-thumbnail" style="background-image: url('https://static1-us.millenium.gg/articles/1/28/88/1/@/251611-gta-5-map-orig-1-article_m-1.jpg')"></div>
-                <div class="game-info">
-                    <h3>GTA V Guessr</h3>
-                    <p>Test your GTA V knowledge! Guess locations across Los Santos and Blaine County.</p>
-                    <div class="game-meta">
-                        <span><i class="fas fa-star"></i> 4.7</span>
-                        <span><i class="fas fa-map"></i> Geography</span>
-                    </div>
-                    <button class="play-btn">Play Now</button>
-                </div>
-            </div>
-
-            <!-- Fortnite Guessr -->
             <div class="game-card" onclick="loadGame('Fortnite Guessr', 'https://lostgamer.io/guessr/maps?games=fortnite')">
-                <div class="game-thumbnail" style="background-image: url('https://image-proxy.bo3.gg/uploads/news/286034/title_image/webp-b8302e5d03cb9c18c24d8feb821ff39f.webp.webp?w=1248&h=624')"></div>
+                <div class="game-thumbnail" style="background-image: url('images/game-thumbnails/fortnight-geoguessr.webp')"></div>
                 <div class="game-info">
                     <h3>Fortnite Guessr</h3>
                     <p>Test your Fortnite knowledge! Guess the location based on the map screenshot.</p>
@@ -94,9 +439,22 @@
                 </div>
             </div>
 
-            <!-- They Are Coming -->
+            <div class="game-card featured-game" onclick="loadGame('GTA V Guessr', 'https://lostgamer.io/guessr/grand-theft-auto-v?controls=no+move')">
+                <div class="featured-badge">New</div>
+                <div class="game-thumbnail" style="background-image: url('images/game-thumbnails/gta5-geoguessr.jpg')"></div>
+                <div class="game-info">
+                    <h3>GTA V Guessr</h3>
+                    <p>Test your GTA V knowledge! Guess locations across Los Santos and Blaine County.</p>
+                    <div class="game-meta">
+                        <span><i class="fas fa-star"></i> 4.7</span>
+                        <span><i class="fas fa-map"></i> Geography</span>
+                    </div>
+                    <button class="play-btn">Play Now</button>
+                </div>
+            </div>
+
             <div class="game-card" onclick="loadGame('They Are Coming', 'https://script.google.com/macros/s/AKfycbzFgyO_45-IB8xSm3aznm-U6NwkuCxr8guuZuCUNwr9kbyHXBGJFRRyNqKHNOwuHwGn/exec')">
-                <div class="game-thumbnail" style="background-image: url('https://img.itch.zone/aW1nLzExMjkzMjQxLnBuZw==/original/YWsiKf.png')"></div>
+                <div class="game-thumbnail" style="background-image: url('images/game-thumbnails/they-are-coming.png')"></div>
                 <div class="game-info">
                     <h3>They Are Coming</h3>
                     <p>Defend against waves of enemies in this action-packed survival game.</p>
@@ -108,24 +466,26 @@
                 </div>
             </div>
 
-            <!-- Traffic Jam 3D -->
-            <div class="game-card" onclick="loadGame('Traffic Jam 3D', 'https://html5.gamedistribution.com/337302b23b5943d8bcfc501d81d50cdb/?gd_sdk_referrer_url=https://gamedistribution.com/games/traffic-jam-3d/')">
-                <div class="game-thumbnail" style="background-image: url('https://img.gamedistribution.com/337302b23b5943d8bcfc501d81d50cdb-512x512.jpeg')"></div>
+            
+            <div class="game-card" onclick="loadGame('Basketball Random', 'https://www.twoplayergames.org/gameframe/basket-random')">
+                <div class="game-thumbnail" style="background-image: url('images/game-thumbnails/basket_random.jpg')">
+                    <span class="sr-only">Basketball Random game thumbnail</span>
+                </div>
                 <div class="game-info">
-                    <h3>Traffic Jam 3D</h3>
-                    <p>Navigate through challenging traffic puzzles.</p>
+                    <h3>Basketball Random</h3>
+                    <p>Fun basketball game with random elements.</p>
                     <div class="game-meta">
-                        <span><i class="fas fa-star"></i> 4.2</span>
-                        <span><i class="fas fa-puzzle-piece"></i> Puzzle</span>
+                        <span><i class="fas fa-star"></i> 4.5</span>
+                        <span><i class="fas fa-users"></i> 2 Players</span>
                     </div>
-                    <button class="play-btn">Play Now</button>
+                    <a class="play-btn">Play Now</a>
                 </div>
             </div>
-
-            <!-- All Bros Games -->
-            <!-- Football Bros -->
+            
             <div class="game-card" onclick="loadGame('Football Bros', 'https://footballbros.io')">
-                <div class="game-thumbnail" style="background-image: url('https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co951q.jpg')"></div>
+                <div class="game-thumbnail" style="background-image: url('images/game-thumbnails/football-bros.jpg')">
+                    <span class="sr-only">Football Bros game thumbnail</span>
+                </div>
                 <div class="game-info">
                     <h3>Football Bros</h3>
                     <p>Fun football game with simple controls.</p>
@@ -133,41 +493,12 @@
                         <span><i class="fas fa-star"></i> 4.5</span>
                         <span><i class="fas fa-users"></i> Multiplayer</span>
                     </div>
-                    <button class="play-btn">Play Now</button>
+                    <a class="play-btn">Play Now</a>
                 </div>
             </div>
 
-            <!-- Basket Bros -->
-            <div class="game-card" onclick="loadGame('Basket Bros', 'https://basketbros.io')">
-                <div class="game-thumbnail" style="background-image: url('https://imgs.crazygames.com/basketbros_1x1/20250320082608/basketbros_1x1-cover?format=auto&quality=70&metadata=none')"></div>
-                <div class="game-info">
-                    <h3>Basket Bros</h3>
-                    <p>Fun basketball game with physics.</p>
-                    <div class="game-meta">
-                        <span><i class="fas fa-star"></i> 4.6</span>
-                        <span><i class="fas fa-users"></i> Multiplayer</span>
-                    </div>
-                    <button class="play-btn">Play Now</button>
-                </div>
-            </div>
-
-            <!-- Baseball Bros -->
-            <div class="game-card" onclick="loadGame('Baseball Bros', 'https://baseballbros.io')">
-                <div class="game-thumbnail" style="background-image: url('https://images.twoplayergames.org/files/games/other/baseball-bros.jpg?auto=format&w=200')"></div>
-                <div class="game-info">
-                    <h3>Baseball Bros</h3>
-                    <p>Fun baseball game with simple controls.</p>
-                    <div class="game-meta">
-                        <span><i class="fas fa-star"></i> 4.3</span>
-                        <span><i class="fas fa-users"></i> Multiplayer</span>
-                    </div>
-                    <button class="play-btn">Play Now</button>
-                </div>
-            </div>
-
-            <!-- Wrestle Bros -->
             <div class="game-card" onclick="loadGame('Wrestle Bros', 'https://wrestlebros.io')">
-                <div class="game-thumbnail" style="background-image: url('https://imgs.crazygames.com/wrestle-bros_16x9/20250320082313/wrestle-bros_16x9-cover?metadata=none&quality=100&width=1200&height=630&fit=crop')"></div>
+                <div class="game-thumbnail" style="background-image: url('images/game-thumbnails/wrestle-bros.jpeg')"></div>
                 <div class="game-info">
                     <h3>Wrestle Bros</h3>
                     <p>Fun wrestling game with physics and multiplayer action.</p>
@@ -179,9 +510,8 @@
                 </div>
             </div>
 
-            <!-- Soccer Bros -->
             <div class="game-card" onclick="loadGame('Soccer Bros', 'https://soccerbros.gg')">
-                <div class="game-thumbnail" style="background-image: url('https://imgs.crazygames.com/soccer-bros_16x9/20240109055124/soccer-bros_16x9-cover?metadata=none&quality=60&height=5154')"></div>
+                <div class="game-thumbnail" style="background-image: url('images/game-thumbnails/soccer-bros.jpeg')"></div>
                 <div class="game-info">
                     <h3>Soccer Bros</h3>
                     <p>Fun soccer game with simple controls and multiplayer matches.</p>
@@ -193,80 +523,67 @@
                 </div>
             </div>
 
-            <!-- All Random Games -->
-            <!-- Basketball Random -->
-            <div class="game-card" onclick="loadGame('Basketball Random', 'https://www.twoplayergames.org/gameframe/basket-random')">
-                <div class="game-thumbnail" style="background-image: url('https://images.twoplayergames.org/files/games/other/Basket_Random/Basket_Random.jpg?auto=format&w=200')"></div>
-                <div class="game-info">
-                    <h3>Basketball Random</h3>
-                    <p>Fun basketball game with random elements.</p>
-                    <div class="game-meta">
-                        <span><i class="fas fa-star"></i> 4.5</span>
-                        <span><i class="fas fa-users"></i> 2 Players</span>
-                    </div>
-                    <button class="play-btn">Play Now</button>
-                </div>
-            </div>
-
-            <!-- Volley Random -->
-            <div class="game-card" onclick="loadGame('Volley Random', 'https://www.twoplayergames.org/gameframe/volley-random')">
-                <div class="game-thumbnail" style="background-image: url('https://images.twoplayergames.org/files/games/o1/Volley_random/Volley_random.jpg?auto=format&w=200')"></div>
-                <div class="game-info">
-                    <h3>Volley Random</h3>
-                    <p>Fun volleyball game with physics.</p>
-                    <div class="game-meta">
-                        <span><i class="fas fa-star"></i> 4.3</span>
-                        <span><i class="fas fa-users"></i> 2 Players</span>
-                    </div>
-                    <button class="play-btn">Play Now</button>
-                </div>
-            </div>
-
-            <!-- Boxing Random -->
-            <div class="game-card" onclick="loadGame('Boxing Random', 'https://www.twoplayergames.org/gameframe/boxing-random')">
-                <div class="game-thumbnail" style="background-image: url('https://images.twoplayergames.org/files/games/other/Boxing_Random/Boxing_Random.jpg?auto=format&w=200')"></div>
-                <div class="game-info">
-                    <h3>Boxing Random</h3>
-                    <p>Fun boxing game with random elements.</p>
-                    <div class="game-meta">
-                        <span><i class="fas fa-star"></i> 4.1</span>
-                        <span><i class="fas fa-users"></i> 2 Players</span>
-                    </div>
-                    <button class="play-btn">Play Now</button>
-                </div>
-            </div>
-
-            <!-- Soccer Random -->
-            <div class="game-card" onclick="loadGame('Soccer Random', 'https://www.twoplayergames.org/gameframe/soccer-random')">
-                <div class="game-thumbnail" style="background-image: url('https://play-lh.googleusercontent.com/G1PIlb6HWKSaDre0XpUcmKGps9T4iamsSlwrogB3EJzYv4bz0M2am4D17MtGzndaOOU=w600-h300-pc0xffffff-pd')"></div>
-                <div class="game-info">
-                    <h3>Soccer Random</h3>
-                    <p>Fun soccer game with physics.</p>
-                    <div class="game-meta">
-                        <span><i class="fas fa-star"></i> 4.4</span>
-                        <span><i class="fas fa-users"></i> 2 Players</span>
-                    </div>
-                    <button class="play-btn">Play Now</button>
-                </div>
-            </div>
-
-            <!-- Getaway Shootout -->
-            <div class="game-card" onclick="loadGame('Getaway Shootout', 'https://www.twoplayergames.org/gameframe/getaway-shootout')">
-                <div class="game-thumbnail" style="background-image: url('https://img.gamesgo.net/storage/images/games/getaway-shootout/getaway-shootout1jpg_с.jpg')"></div>
-                <div class="game-info">
-                    <h3>Getaway Shootout</h3>
-                    <p>Race to the getaway vehicle.</p>
-                    <div class="game-meta">
-                        <span><i class="fas fa-star"></i> 4.2</span>
-                        <span><i class="fas fa-users"></i> 2 Players</span>
-                    </div>
-                    <button class="play-btn">Play Now</button>
-                </div>
-            </div>
+            
         </div>
     </div>
 
-    <script src="js/main.js"></script>
-    <script src="js/games.js"></script>
+    <script>
+        // Mobile menu functionality
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const navLinks = document.querySelector('.nav-links');
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            
+            if (!navLinks.contains(e.target) && !mobileBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Single function to load any game
+        function loadGame(gameName, gameUrl) {
+            document.getElementById('gameFrame').src = gameUrl;
+            document.getElementById('gameTitle').textContent = gameName;
+            document.getElementById('gamePlayer').style.display = 'block';
+            document.getElementById('gamePlayer').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeGame() {
+            document.getElementById('gameFrame').src = '';
+            document.getElementById('gamePlayer').style.display = 'none';
+        }
+
+        function fullscreenGame() {
+            const iframe = document.getElementById('gameFrame');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) {
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            }
+        }
+
+        // Add click event listeners to all play buttons for better UX
+        document.addEventListener('DOMContentLoaded', function() {
+            const playButtons = document.querySelectorAll('.play-btn');
+            playButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent triggering the card click event
+                    const card = this.closest('.game-card');
+                    card.click(); // Trigger the card's click event
+                });
+            });
+        });
+    </script>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
