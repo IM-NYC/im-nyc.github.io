@@ -1,0 +1,46 @@
+<div class="app-shell">
+  <header class="header">
+    <div class="header__logo">
+      <span class="logo-mark">WDS</span>
+      <div class="logo-text">
+        <span class="logo-title">Web Dev Studio</span>
+        <span class="logo-subtitle">Websites tailored for small businesses</span>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a routerLink="/" routerLinkActive="nav__link--active" [routerLinkActiveOptions]="{ exact: true }" class="nav__link">
+        Home
+      </a>
+      <a routerLink="/services" routerLinkActive="nav__link--active" class="nav__link">
+        Services
+      </a>
+      <a routerLink="/about" routerLinkActive="nav__link--active" class="nav__link">
+        About
+      </a>
+      <a routerLink="/contact" routerLinkActive="nav__link--active" class="nav__link nav__link--cta">
+        Contact
+      </a>
+    </nav>
+
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <main class="main">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__content">
+      <p>©  Web Dev Studio. All rights reserved.</p>
+      <p class="footer__sub">
+        Custom websites for small businesses across North America.
+      </p>
+      <p class="footer__contact">Call us: <a href="tel:{{ phoneNumber }}">{{ phoneNumber }}</a></p>
+    </div>
+  </footer>
+</div>
+
