@@ -1,5 +1,5 @@
 import './App.css'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { type MotionValue, motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 
 import heroImage from './assets/personal-picture.png'
@@ -40,7 +40,7 @@ function App() {
 }
 
 type HeroProps = {
-  heroGlowOpacity: ReturnType<typeof useTransform>
+  heroGlowOpacity: MotionValue<number>
 }
 
 function Header() {
