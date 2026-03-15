@@ -1,5 +1,5 @@
 import './App.css'
-import { type MotionValue, motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 
 import heroImage from './assets/personal-picture.png'
@@ -27,7 +27,7 @@ function App() {
       <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col px-6 pb-20 pt-8 md:px-10 lg:px-16">
         <Header />
         <main className="mt-8 space-y-32 md:mt-16 md:space-y-40">
-          <Hero heroGlowOpacity={heroGlowOpacity} />
+          <Hero heroGlow={<motion.div style={{ opacity: heroGlowOpacity }} className="pointer-events-none absolute -inset-10 -z-10 bg-[radial-gradient(circle_at_20%_0,_rgba(56,189,248,0.45),_transparent_55%),radial-gradient(circle_at_80%_100%,_rgba(129,140,248,0.45),_transparent_55%)] blur-3xl" />} />
           <About />
           <Skills />
           <Projects />
@@ -40,7 +40,7 @@ function App() {
 }
 
 type HeroProps = {
-  heroGlowOpacity: MotionValue<number>
+  heroGlow: React.ReactNode
 }
 
 function Header() {
@@ -75,7 +75,7 @@ function Header() {
   )
 }
 
-function Hero({ heroGlowOpacity }: HeroProps) {
+function Hero({ heroGlow }: HeroProps) {
   return (
     <section
       id="hero"
@@ -158,10 +158,7 @@ function Hero({ heroGlowOpacity }: HeroProps) {
         transition={{ delay: 0.2, duration: 0.9, ease: 'easeOut' }}
         className="relative"
       >
-        <motion.div
-          style={{ opacity: heroGlowOpacity }}
-          className="pointer-events-none absolute -inset-10 -z-10 bg-[radial-gradient(circle_at_20%_0,_rgba(56,189,248,0.45),_transparent_55%),radial-gradient(circle_at_80%_100%,_rgba(129,140,248,0.45),_transparent_55%)] blur-3xl"
-        />
+        {heroGlow}
         <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-black/40 shadow-soft-xl">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(15,23,42,0.7),_transparent_65%)]" />
           <div className="relative aspect-[4/5] w-full">
